@@ -8,12 +8,19 @@ import static edu.wpi.first.units.Units.*;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -35,8 +42,25 @@ public class RobotContainer {
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
+    private ShuffleboardTab tab = Shuffleboard.getTab("Tab1");
+
+
+    private final SendableChooser<Command> chooser = new SendableChooser<>();
+
     public RobotContainer() {
         configureBindings();
+        
+        // Autos
+        chooser.addOption("NinetyDegree", degreeTest()
+        // .finallyDo(() -> {drivetrain.zeroHeading();})
+        );
+
+        chooser.addOption("OneMeter", meterTest());
+
+        chooser.addOption("Fun", funTest() );
+
+        SmartDashboard.putData("Auto choices", chooser);
+        tab.add("Auto Chooser", chooser);
     }
 
     private void configureBindings() {
@@ -70,6 +94,17 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        return Commands.print("No autonomous command configured");
+        return chooser.getSelected();
+    }
+    
+    // Auto Commands
+    public Command degreeTest() {
+        return new PathPlannerAuto("NinetyDegree");
+    }
+    public Command meterTest() {
+        return new PathPlannerAuto("OneMeter");
+    }
+    public Command funTest() {
+        return new PathPlannerAuto("Fun");
     }
 }
