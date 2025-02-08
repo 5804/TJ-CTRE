@@ -152,9 +152,10 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
                 ),
                 new PPHolonomicDriveController(
                     // PID constants for translation
-                    new PIDConstants(20, 0, 0),
+                    new PIDConstants(0.9, 0, 0), // kP: 20 // Current Happy values: kP: .9,1.63
+                    // *** Decrease kP between 20-25 ***
                     // PID constants for rotation
-                    new PIDConstants(15.975, 0, 0)
+                    new PIDConstants(1.63, 0, 0) // kP: 15.975
                 ),
                 config,
                 // Assume the path needs to be flipped for Red vs Blue, this is normally the case
@@ -217,7 +218,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         Matrix<N3, N1> visionStandardDeviation,
         SwerveModuleConstants<?, ?, ?>... modules
     ) {
-        super(drivetrainConstants, odometryUpdateFrequency, odometryStandardDeviation, visionStandardDeviation, modules);
+        super(drivetrainConstants, 50, odometryStandardDeviation, visionStandardDeviation, modules);
         if (Utils.isSimulation()) {
             startSimThread();
         }

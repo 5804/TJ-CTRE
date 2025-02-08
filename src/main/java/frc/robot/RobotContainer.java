@@ -57,7 +57,27 @@ public class RobotContainer {
 
         chooser.addOption("OneMeter", meterTest());
 
+        chooser.addOption("90degree", Test90degree());
+
         chooser.addOption("Fun", funTest() );
+
+        chooser.addOption("Circle", circle());
+
+        chooser.addOption("rotatingCircle", rotatingCircle());
+
+        chooser.addOption("rotatingCircle2", rotatingCircle2());
+
+        chooser.addOption("Diamond", Diamond());
+
+        chooser.addOption("DiamondChoreo", DiamondChoreo());
+
+        chooser.addOption("OneMeterChoreo", OneMeterChoreo());
+
+        chooser.addOption("PlusChoreo", PlusChoreo());
+
+        chooser.addOption("StackedWavesChoreo", StackedWavesChoreo());
+
+        chooser.addOption("Coral5PreloadedMidChoreo", Coral5PreloadedMidChoreo());
 
         SmartDashboard.putData("Auto choices", chooser);
         tab.add("Auto Chooser", chooser);
@@ -104,7 +124,37 @@ public class RobotContainer {
     public Command meterTest() {
         return new PathPlannerAuto("OneMeter");
     }
+    public Command Test90degree() {
+        return new PathPlannerAuto("90degree");
+    }
     public Command funTest() {
         return new PathPlannerAuto("Fun");
+    }
+    public Command circle() {
+        return new PathPlannerAuto("Circle");
+    }
+    public Command rotatingCircle() {
+        return new PathPlannerAuto("rotatingCircle");
+    }
+    public Command rotatingCircle2() {
+        return new PathPlannerAuto("rotatingCircle2");
+    }
+    public Command Diamond() {
+        return new PathPlannerAuto("Diamond");
+    }
+    public Command DiamondChoreo() {
+        return new PathPlannerAuto("DiamondChoreo");
+    }
+    public Command OneMeterChoreo() {
+        return new PathPlannerAuto("OneMeterChoreo");
+    }
+    public Command PlusChoreo() {
+        return new PathPlannerAuto("PlusChoreo");
+    }
+    public Command StackedWavesChoreo() {
+        return new PathPlannerAuto("StackedWavesChoreo");
+    }
+    public Command Coral5PreloadedMidChoreo() {
+        return new PathPlannerAuto("Coral5PreloadedMidChoreo");
     }
 }
